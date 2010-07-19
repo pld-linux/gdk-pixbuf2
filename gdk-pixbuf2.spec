@@ -26,6 +26,7 @@ BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxslt-progs
+BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	xorg-lib-libX11-devel
 Requires:	glib2 >= 1:2.25.9

@@ -7,12 +7,12 @@
 Summary:	An image loading library
 Summary(pl.UTF-8):	Biblioteka ładująca obrazki
 Name:		gdk-pixbuf2
-Version:	2.21.5
+Version:	2.21.6
 Release:	1
 License:	LGPL v2
 Group:		X11/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdk-pixbuf/2.21/gdk-pixbuf-%{version}.tar.bz2
-# Source0-md5:	63962121203282a01ec5246aeaed1a97
+# Source0-md5:	03b8b833e376b72dd228e268ff8fe733
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
@@ -135,7 +135,7 @@ exit 0
 
 %files -f gdk-pixbuf.lang
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS README
+%doc AUTHORS NEWS
 %attr(755,root,root) %{_bindir}/gdk-pixbuf-query-loaders%{pqext}
 %attr(755,root,root) %{_libdir}/libgdk_pixbuf-2.0.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgdk_pixbuf-2.0.so.0

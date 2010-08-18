@@ -80,6 +80,8 @@ Dokumentacja API biblioteki gdk-pixbuf.
 
 %prep
 %setup -q -n gdk-pixbuf-%{version}
+sed -i s#^io## po/LINGUAS
+rm po/io.po
 
 %build
 %{__libtoolize}

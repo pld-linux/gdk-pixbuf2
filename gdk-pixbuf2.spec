@@ -7,18 +7,19 @@
 Summary:	An image loading library
 Summary(pl.UTF-8):	Biblioteka ładująca obrazki
 Name:		gdk-pixbuf2
-Version:	2.21.7
+Version:	2.22.0
 Release:	1
 License:	LGPL v2
 Group:		X11/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdk-pixbuf/2.21/gdk-pixbuf-%{version}.tar.bz2
-# Source0-md5:	341ef6c8870fddb411f8bb24b9fb638b
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdk-pixbuf/2.22/gdk-pixbuf-%{version}.tar.bz2
+# Source0-md5:	0447e70f7bada542182d12e6459442b0
+Patch0:		gobject-introspection.patch
 URL:		http://www.gtk.org/
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	gettext-devel >= 0.17
 BuildRequires:	glib2-devel >= 1:2.25.9
-BuildRequires:	gobject-introspection-devel >= 0.6.14
+BuildRequires:	gobject-introspection-devel >= 0.9.5
 BuildRequires:	gtk-doc >= 1.11
 BuildRequires:	jasper-devel
 BuildRequires:	libjpeg-devel
@@ -80,6 +81,7 @@ Dokumentacja API biblioteki gdk-pixbuf.
 
 %prep
 %setup -q -n gdk-pixbuf-%{version}
+%patch0 -p1
 sed -i s#^io## po/LINGUAS
 rm po/io.po
 
@@ -164,7 +166,7 @@ exit 0
 %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-wbmp.so
 %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-xbm.so
 %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-xpm.so
-#%%{_libdir}/girepository-1.0/GdkPixbuf-2.0.typelib
+%{_libdir}/girepository-1.0/GdkPixbuf-2.0.typelib
 %{_mandir}/man1/gdk-pixbuf-query-loaders.1*
 
 %files devel
@@ -174,7 +176,7 @@ exit 0
 %attr(755,root,root) %{_libdir}/libgdk_pixbuf_xlib-2.0.so
 %{_libdir}/libgdk_pixbuf-2.0.la
 %{_libdir}/libgdk_pixbuf_xlib-2.0.la
-#%{_datadir}/gir-1.0/GdkPixbuf-2.0.gir
+%{_datadir}/gir-1.0/GdkPixbuf-2.0.gir
 %{_mandir}/man1/gdk-pixbuf-csource.1*
 %{_includedir}/gdk-pixbuf-2.0
 %{_pkgconfigdir}/gdk-pixbuf-2.0.pc

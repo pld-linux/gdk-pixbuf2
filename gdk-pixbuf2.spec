@@ -4,8 +4,8 @@
 #
 %define		abiver		2.10.0
 #
-Summary:	An image loading library
-Summary(pl.UTF-8):	Biblioteka ładująca obrazki
+Summary:	An image loading and scaling library
+Summary(pl.UTF-8):	Biblioteka ładująca i skalująca obrazki
 Name:		gdk-pixbuf2
 Version:	2.22.0
 Release:	1
@@ -42,14 +42,15 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %endif
 
 %description
-gdk-pixbuf is an image loading library that can be extended by
-loadable modules for new image formats.
+gdk-pixbuf is an image loading and scaling library that can be
+extended by loadable modules for new image formats.
 
 It is used by toolkits such as GTK+ or Clutter.
 
 %description -l pl.UTF-8
-gdk-pixbuf to biblioteka ładująca obrazki, której funkcjonalność może
-być rozszerzana o obsługę nowych formatów poprzez ładowane moduły.
+gdk-pixbuf to biblioteka ładująca i skalująca obrazki, której
+funkcjonalność może być rozszerzana o obsługę nowych formatów poprzez
+ładowane moduły.
 
 Używana jest przez biblioteki takie jak GTK+ czy Clutter.
 
@@ -86,6 +87,7 @@ sed -i s#^io## po/LINGUAS
 rm po/io.po
 
 %build
+%{__gettextize}
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
@@ -112,9 +114,9 @@ rm -rf $RPM_BUILD_ROOT
 
 touch $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders.cache
 
-%{__rm} -f $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/*.la
 
-%{?!with_apidocs:%{__rm} -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
+%{!?with_apidocs:%{__rm} -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
 
 %find_lang gdk-pixbuf
 

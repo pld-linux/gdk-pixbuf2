@@ -32,6 +32,7 @@ BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	xorg-lib-libX11-devel
 Requires:	glib2 >= 1:2.25.9
+Suggests:	librsvg >= 2.31
 Conflicts:	gtk+2 < 2:2.21.3-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 

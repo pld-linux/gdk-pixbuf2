@@ -112,37 +112,34 @@ rm -rf $RPM_BUILD_ROOT
 %if "%{_lib}" != "lib"
 # We need to have 32-bit and 64-bit binaries as they have hardcoded LIBDIR.
 # (needed when multilib is used)
-%{__mv} $RPM_BUILD_ROOT%{_bindir}/gdk-pixbuf-query-loaders{,%{pqext}}
+mv -f $RPM_BUILD_ROOT%{_bindir}/gdk-pixbuf-query-loaders{,%{pqext}}
 %endif
 
 touch $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders.cache
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/*.la
+rm -f $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/*.la
+rm -f $RPM_BUILD_ROOT%{_libdir}/libgdk_pixbuf{,_xlib}-2.0.la
 
-%{!?with_apidocs:%{__rm} -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
+%{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
 
-%find_lang gdk-pixbuf
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/ldconfig
-
 umask 022
-%{_bindir}/gdk-pixbuf-query-loaders%{pqext} --update-cache
-exit 0
+%{_bindir}/gdk-pixbuf-query-loaders%{pqext} --update-cache || :
 
 %postun
 /sbin/ldconfig
-
 if [ "$1" != "0" ]; then
-    umask 022
-    %{_bindir}/gdk-pixbuf-query-loaders%{pqext} --update-cache
+	umask 022
+	%{_bindir}/gdk-pixbuf-query-loaders%{pqext} --update-cache || :
 fi
-exit 0
 
-%files -f gdk-pixbuf.lang
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS
 %attr(755,root,root) %{_bindir}/gdk-pixbuf-query-loaders%{pqext}
@@ -154,23 +151,7 @@ exit 0
 %dir %{_libdir}/gdk-pixbuf-2.0/%{abiver}
 %ghost %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders.cache
 %dir %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-ani.so
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-bmp.so
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-gif.so
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-icns.so
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-ico.so
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-jasper.so
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-jpeg.so
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-pcx.so
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-png.so
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-pnm.so
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-qtif.so
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-ras.so
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-tga.so
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-tiff.so
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-wbmp.so
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-xbm.so
-%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-xpm.so
+%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-*.so
 %{_libdir}/girepository-1.0/GdkPixbuf-2.0.typelib
 %{_mandir}/man1/gdk-pixbuf-query-loaders.1*
 
@@ -179,8 +160,6 @@ exit 0
 %attr(755,root,root) %{_bindir}/gdk-pixbuf-csource
 %attr(755,root,root) %{_libdir}/libgdk_pixbuf-2.0.so
 %attr(755,root,root) %{_libdir}/libgdk_pixbuf_xlib-2.0.so
-%{_libdir}/libgdk_pixbuf-2.0.la
-%{_libdir}/libgdk_pixbuf_xlib-2.0.la
 %{_datadir}/gir-1.0/GdkPixbuf-2.0.gir
 %{_mandir}/man1/gdk-pixbuf-csource.1*
 %{_includedir}/gdk-pixbuf-2.0

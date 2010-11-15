@@ -87,7 +87,7 @@ Dokumentacja API biblioteki gdk-pixbuf.
 %patch0 -p1
 %patch1 -p1
 sed -i s#^io## po/LINGUAS
-rm po/io.po
+%{__rm} po/io.po
 
 %build
 %{__gettextize}
@@ -117,12 +117,12 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/gdk-pixbuf-query-loaders{,%{pqext}}
 
 touch $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders.cache
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/*.la
-rm -f $RPM_BUILD_ROOT%{_libdir}/libgdk_pixbuf{,_xlib}-2.0.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/*.la \
+	$RPM_BUILD_ROOT%{_libdir}/libgdk_pixbuf{,_xlib}-2.0.la
 
-%{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
+%{!?with_apidocs:%{__rm} -r $RPM_BUILD_ROOT%{_gtkdocdir}}
 
-%find_lang %{name}
+%find_lang gdk-pixbuf %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT

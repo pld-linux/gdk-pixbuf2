@@ -30,6 +30,7 @@ BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxslt-progs
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	xorg-lib-libX11-devel
 Requires:	glib2 >= 1:2.25.9
 Suggests:	librsvg >= 2.31

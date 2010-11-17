@@ -8,7 +8,7 @@ Summary:	An image loading and scaling library
 Summary(pl.UTF-8):	Biblioteka ładująca i skalująca obrazki
 Name:		gdk-pixbuf2
 Version:	2.22.1
-Release:	2
+Release:	3
 License:	LGPL v2+
 Group:		X11/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdk-pixbuf/2.22/gdk-pixbuf-%{version}.tar.bz2
@@ -123,7 +123,7 @@ touch $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders.cache
 
 %{!?with_apidocs:%{__rm} -r $RPM_BUILD_ROOT%{_gtkdocdir}}
 
-%find_lang gdk-pixbuf %{name}
+%find_lang gdk-pixbuf %{name}.lang
 
 %clean
 rm -rf $RPM_BUILD_ROOT

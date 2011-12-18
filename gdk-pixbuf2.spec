@@ -1,3 +1,4 @@
+# TODO: consider -x11 subpackages
 #
 # Conditional build:
 %bcond_without	apidocs		# do not build and package API docs

@@ -140,6 +140,8 @@ umask 022
 /sbin/ldconfig
 if [ "$1" != "0" ]; then
 	umask 022
+	# the $1 check does not match for multilib installs, check also that the binary still exists
+	[ ! -x %{_bindir}/gdk-pixbuf-query-loaders%{pqext} ] || \
 	%{_bindir}/gdk-pixbuf-query-loaders%{pqext} --update-cache || :
 fi
 

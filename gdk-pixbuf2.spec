@@ -19,7 +19,7 @@ URL:		http://developer.gnome.org/gdk-pixbuf/
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	gettext-devel >= 0.17
-BuildRequires:	glib2-devel >= 1:2.32.0
+BuildRequires:	glib2-devel >= 1:2.34.0
 BuildRequires:	gobject-introspection-devel >= 0.10.0
 BuildRequires:	gtk-doc >= 1.11
 BuildRequires:	jasper-devel
@@ -34,7 +34,7 @@ BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
-Requires:	glib2 >= 1:2.32.0
+Requires:	glib2 >= 1:2.34.0
 Suggests:	librsvg >= 2.31
 Conflicts:	gtk+2 < 2:2.21.3-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -64,7 +64,7 @@ Summary:	Header files for gdk-pixbuf library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gdk-pixbuf
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.32.0
+Requires:	glib2-devel >= 1:2.34.0
 Conflicts:	gtk+2-devel < 2:2.21.3-1
 
 %description devel

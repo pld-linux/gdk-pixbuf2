@@ -8,18 +8,18 @@
 Summary:	An image loading and scaling library
 Summary(pl.UTF-8):	Biblioteka ładująca i skalująca obrazki
 Name:		gdk-pixbuf2
-Version:	2.30.2
+Version:	2.30.3
 Release:	1
 License:	LGPL v2+
 Group:		X11/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdk-pixbuf/2.30/gdk-pixbuf-%{version}.tar.xz
-# Source0-md5:	792aa0d67e14faa89dec0d5248d32812
+# Source0-md5:	81161cc895eb43afd9ae7354b87e2261
 Patch0:		%{name}-png-nodep.patch
 URL:		http://developer.gnome.org/gdk-pixbuf/
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	gettext-devel >= 0.17
-BuildRequires:	glib2-devel >= 1:2.37.2
+BuildRequires:	glib2-devel >= 1:2.37.6
 BuildRequires:	gobject-introspection-devel >= 0.10.0
 BuildRequires:	gtk-doc >= 1.11
 BuildRequires:	jasper-devel
@@ -34,7 +34,7 @@ BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
-Requires:	glib2 >= 1:2.37.2
+Requires:	glib2 >= 1:2.37.6
 Suggests:	librsvg >= 2.31
 Conflicts:	gtk+2 < 2:2.21.3-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -64,7 +64,7 @@ Summary:	Header files for gdk-pixbuf library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gdk-pixbuf
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.37.2
+Requires:	glib2-devel >= 1:2.37.6
 Conflicts:	gtk+2-devel < 2:2.21.3-1
 
 %description devel
@@ -124,9 +124,9 @@ touch $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders.cache
 
 %{!?with_apidocs:%{__rm} -r $RPM_BUILD_ROOT%{_gtkdocdir}}
 
-%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/{sr@ije,sr@ijekavian}
+%{__mv} $RPM_BUILD_ROOT%{_localedir}/{sr@ije,sr@ijekavian}
 # not supported by glibc
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/io
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/io
 
 %find_lang gdk-pixbuf %{name}.lang
 

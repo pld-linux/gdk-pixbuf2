@@ -8,12 +8,12 @@
 Summary:	An image loading and scaling library
 Summary(pl.UTF-8):	Biblioteka ładująca i skalująca obrazki
 Name:		gdk-pixbuf2
-Version:	2.30.3
+Version:	2.30.4
 Release:	1
 License:	LGPL v2+
 Group:		X11/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdk-pixbuf/2.30/gdk-pixbuf-%{version}.tar.xz
-# Source0-md5:	81161cc895eb43afd9ae7354b87e2261
+# Source0-md5:	f20c0a5aa827332869c85c47d88394ce
 Patch0:		%{name}-png-nodep.patch
 URL:		http://developer.gnome.org/gdk-pixbuf/
 BuildRequires:	autoconf >= 2.63

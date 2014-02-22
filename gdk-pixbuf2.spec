@@ -21,7 +21,7 @@ BuildRequires:	automake >= 1:1.11
 BuildRequires:	gettext-devel >= 0.17
 BuildRequires:	glib2-devel >= 1:2.37.6
 BuildRequires:	gobject-introspection-devel >= 0.10.0
-BuildRequires:	gtk-doc >= 1.11
+BuildRequires:	gtk-doc >= 1.20
 BuildRequires:	jasper-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel

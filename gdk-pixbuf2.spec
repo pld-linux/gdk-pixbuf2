@@ -18,7 +18,7 @@ Patch0:		%{name}-png-nodep.patch
 URL:		http://developer.gnome.org/gdk-pixbuf/
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	gettext-tools >= 0.17
+BuildRequires:	gettext-tools >= 0.19
 BuildRequires:	glib2-devel >= 1:2.37.6
 BuildRequires:	gobject-introspection-devel >= 0.10.0
 BuildRequires:	gtk-doc >= 1.20

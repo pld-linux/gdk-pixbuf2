@@ -2,14 +2,13 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# do not build and package API docs
-#
+
 %define		abiver		2.10.0
-#
 Summary:	An image loading and scaling library
 Summary(pl.UTF-8):	Biblioteka ładująca i skalująca obrazki
 Name:		gdk-pixbuf2
 Version:	2.34.0
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		X11/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdk-pixbuf/2.34/gdk-pixbuf-%{version}.tar.xz
@@ -78,6 +77,9 @@ Summary:	gdk-pixbuf API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki gdk-pixbuf
 Group:		Documentation
 Conflicts:	gtk+2-apidocs < 2:2.21.3-1
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 API documentation for gdk-pixbuf library.

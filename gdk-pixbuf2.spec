@@ -14,7 +14,7 @@ Group:		X11/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdk-pixbuf/2.36/gdk-pixbuf-%{version}.tar.xz
 # Source0-md5:	1a3baf91956c7923dab49ee3de100ce1
 Patch0:		%{name}-png-nodep.patch
-URL:		http://developer.gnome.org/gdk-pixbuf/
+URL:		https://developer.gnome.org/gdk-pixbuf/
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	docbook-dtd43-xml

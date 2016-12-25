@@ -7,12 +7,12 @@
 Summary:	An image loading and scaling library
 Summary(pl.UTF-8):	Biblioteka ładująca i skalująca obrazki
 Name:		gdk-pixbuf2
-Version:	2.36.0
+Version:	2.36.2
 Release:	1
 License:	LGPL v2+
 Group:		X11/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdk-pixbuf/2.36/gdk-pixbuf-%{version}.tar.xz
-# Source0-md5:	1a3baf91956c7923dab49ee3de100ce1
+# Source0-md5:	d307c1eef87bac86e42abbf4eda1eac2
 Patch0:		%{name}-png-nodep.patch
 URL:		https://developer.gnome.org/gdk-pixbuf/
 BuildRequires:	autoconf >= 2.63
@@ -155,6 +155,7 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS
 %attr(755,root,root) %{_bindir}/gdk-pixbuf-query-loaders%{pqext}
+%attr(755,root,root) %{_bindir}/gdk-pixbuf-thumbnailer
 %attr(755,root,root) %{_libdir}/libgdk_pixbuf-2.0.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgdk_pixbuf-2.0.so.0
 %attr(755,root,root) %{_libdir}/libgdk_pixbuf_xlib-2.0.so.*.*.*
@@ -164,6 +165,7 @@ fi
 %ghost %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders.cache
 %dir %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders
 %attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-*.so
+%{_datadir}/thumbnailers/gdk-pixbuf-thumbnailer.thumbnailer
 %{_libdir}/girepository-1.0/GdkPixbuf-2.0.typelib
 %{_mandir}/man1/gdk-pixbuf-query-loaders.1*
 

@@ -20,12 +20,12 @@ BuildRequires:	automake >= 1:1.11
 BuildRequires:	docbook-dtd43-xml
 BuildRequires:	docbook-style-xsl
 BuildRequires:	gettext-tools >= 0.19
-BuildRequires:	glib2-devel >= 1:2.37.6
+BuildRequires:	glib2-devel >= 1:2.48.0
 BuildRequires:	gobject-introspection-devel >= 0.10.0
 BuildRequires:	gtk-doc >= 1.20
 BuildRequires:	jasper-devel
 BuildRequires:	libjpeg-devel
-BuildRequires:	libpng-devel
+BuildRequires:	libpng-devel >= 1.0
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxslt-progs
@@ -35,7 +35,7 @@ BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
-Requires:	glib2 >= 1:2.37.6
+Requires:	glib2 >= 1:2.48.0
 Suggests:	librsvg >= 2.31
 Conflicts:	gtk+2 < 2:2.21.3-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -65,7 +65,7 @@ Summary:	Header files for gdk-pixbuf library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gdk-pixbuf
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.37.6
+Requires:	glib2-devel >= 1:2.48.0
 Conflicts:	gtk+2-devel < 2:2.21.3-1
 
 %description devel

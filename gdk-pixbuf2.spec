@@ -7,16 +7,13 @@
 Summary:	An image loading and scaling library
 Summary(pl.UTF-8):	Biblioteka ładująca i skalująca obrazki
 Name:		gdk-pixbuf2
-Version:	2.36.12
+Version:	2.38.0
 Release:	1
 License:	LGPL v2+
 Group:		X11/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdk-pixbuf/2.36/gdk-pixbuf-%{version}.tar.xz
-# Source0-md5:	7305ab43d741270ffa53ad2896d7f530
-Patch0:		%{name}-png-nodep.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdk-pixbuf/2.38/gdk-pixbuf-%{version}.tar.xz
+# Source0-md5:	77765f24496dc8c90c6e0cbe10fd8f0e
 URL:		https://developer.gnome.org/gdk-pixbuf/
-BuildRequires:	autoconf >= 2.63
-BuildRequires:	automake >= 1:1.11
 BuildRequires:	docbook-dtd43-xml
 BuildRequires:	docbook-style-xsl
 BuildRequires:	gettext-tools >= 0.19
@@ -29,9 +26,11 @@ BuildRequires:	libpng-devel >= 1.0
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxslt-progs
+BuildRequires:	meson >= 0.46.0
+BuildRequires:	ninja
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.527
+BuildRequires:	rpmbuild(macros) >= 1.727
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
@@ -74,6 +73,18 @@ Header files for gdk-pixbuf library.
 %description devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki gdk-pixbuf.
 
+%package static
+Summary:	Static gdk-pixbuf libraries
+Summary(pl.UTF-8):	Biblioteki statyczne gdk-pixbuf
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
+
+%description static
+Static gdk-pixbuf libraries.
+
+%description static -l pl.UTF-8
+Biblioteki statyczne gdk-pixbuf.
+
 %package apidocs
 Summary:	gdk-pixbuf API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki gdk-pixbuf
@@ -91,29 +102,20 @@ Dokumentacja API biblioteki gdk-pixbuf.
 
 %prep
 %setup -q -n gdk-pixbuf-%{version}
-%patch0 -p1
 
 %build
-%{__gettextize}
-%{__libtoolize}
-%{__aclocal} -I m4
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	--disable-silent-rules \
-	--enable-man \
-	%{__enable_disable apidocs gtk-doc} \
-	--with-html-dir=%{_gtkdocdir} \
-	--with-libjasper \
-	--with-x11
-%{__make}
+%meson build \
+	-Ddocs=%{?with_apidocs:true}%{!?with_apidocs:false} \
+	-Dinstalled_tests=false \
+	-Djasper=true \
+	-Dman=true \
+	-Dx11=true
+%meson_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+%meson_install -j1 -C build
 
 %if "%{_lib}" != "lib"
 # We need to have 32-bit and 64-bit binaries as they have hardcoded LIBDIR.
@@ -122,9 +124,6 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/gdk-pixbuf-query-loaders{,%{pqext}}
 %endif
 
 touch $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders.cache
-
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/*.la \
-	$RPM_BUILD_ROOT%{_libdir}/libgdk_pixbuf{,_xlib}-2.0.la
 
 %{!?with_apidocs:%{__rm} -r $RPM_BUILD_ROOT%{_gtkdocdir}}
 
@@ -153,7 +152,7 @@ fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS
+%doc NEWS README.md
 %attr(755,root,root) %{_bindir}/gdk-pixbuf-query-loaders%{pqext}
 %attr(755,root,root) %{_bindir}/gdk-pixbuf-thumbnailer
 %attr(755,root,root) %{_libdir}/libgdk_pixbuf-2.0.so.*.*.*
@@ -167,6 +166,7 @@ fi
 %attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-*.so
 %{_datadir}/thumbnailers/gdk-pixbuf-thumbnailer.thumbnailer
 %{_libdir}/girepository-1.0/GdkPixbuf-2.0.typelib
+%{_libdir}/girepository-1.0/GdkPixdata-2.0.typelib
 %{_mandir}/man1/gdk-pixbuf-query-loaders.1*
 
 %files devel
@@ -176,10 +176,16 @@ fi
 %attr(755,root,root) %{_libdir}/libgdk_pixbuf-2.0.so
 %attr(755,root,root) %{_libdir}/libgdk_pixbuf_xlib-2.0.so
 %{_datadir}/gir-1.0/GdkPixbuf-2.0.gir
+%{_datadir}/gir-1.0/GdkPixdata-2.0.gir
 %{_mandir}/man1/gdk-pixbuf-csource.1*
 %{_includedir}/gdk-pixbuf-2.0
 %{_pkgconfigdir}/gdk-pixbuf-2.0.pc
 %{_pkgconfigdir}/gdk-pixbuf-xlib-2.0.pc
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libgdk_pixbuf-2.0.a
+%{_libdir}/libgdk_pixbuf_xlib-2.0.a
 
 %if %{with apidocs}
 %files apidocs

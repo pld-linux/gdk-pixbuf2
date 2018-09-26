@@ -23,7 +23,7 @@ BuildRequires:	gtk-doc >= 1.20
 BuildRequires:	jasper-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel >= 1.0
-BuildRequires:	libtiff-devel
+BuildRequires:	libtiff-devel >= 4
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxslt-progs
 BuildRequires:	meson >= 0.46.0
@@ -35,6 +35,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.48.0
+Requires:	shared-mime-info
 Suggests:	librsvg >= 2.31
 Conflicts:	gtk+2 < 2:2.21.3-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -66,6 +67,8 @@ Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.48.0
 Conflicts:	gtk+2-devel < 2:2.21.3-1
+# for gdk-pixbuf-xlib-2.0:
+Requires:	xorg-lib-libX11-devel
 
 %description devel
 Header files for gdk-pixbuf library.
@@ -120,7 +123,7 @@ rm -rf $RPM_BUILD_ROOT
 %if "%{_lib}" != "lib"
 # We need to have 32-bit and 64-bit binaries as they have hardcoded LIBDIR.
 # (needed when multilib is used)
-mv -f $RPM_BUILD_ROOT%{_bindir}/gdk-pixbuf-query-loaders{,%{pqext}}
+%{__mv} $RPM_BUILD_ROOT%{_bindir}/gdk-pixbuf-query-loaders{,%{pqext}}
 %endif
 
 touch $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders.cache

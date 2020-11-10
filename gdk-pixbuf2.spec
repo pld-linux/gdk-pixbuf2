@@ -1,41 +1,37 @@
-# TODO: consider -x11 subpackages
 #
 # Conditional build:
-%bcond_without	apidocs		# do not build and package API docs
+%bcond_without	apidocs		# API documentation
 
 %define		abiver		2.10.0
-Summary:	An image loading and scaling library
-Summary(pl.UTF-8):	Biblioteka ładująca i skalująca obrazki
+Summary:	GdkPixbuf - an image loading and scaling library
+Summary(pl.UTF-8):	GdkPixbuf - biblioteka ładująca i skalująca obrazki
 Name:		gdk-pixbuf2
-Version:	2.40.0
+Version:	2.42.0
 Release:	1
 License:	LGPL v2+
-Group:		X11/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdk-pixbuf/2.40/gdk-pixbuf-%{version}.tar.xz
-# Source0-md5:	05eb1ebc258ba905f1c8644ef49de064
+Group:		Libraries
+Source0:	https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-%{version}.tar.xz
+# Source0-md5:	319ebe4d10db655308fd0ad268101542
 URL:		https://developer.gnome.org/gdk-pixbuf/
 BuildRequires:	docbook-dtd43-xml
 BuildRequires:	docbook-style-xsl
 BuildRequires:	gettext-tools >= 0.19
-BuildRequires:	glib2-devel >= 1:2.48.0
+BuildRequires:	glib2-devel >= 1:2.56.0
 BuildRequires:	gobject-introspection-devel >= 0.10.0
 BuildRequires:	gtk-doc >= 1.20
-BuildRequires:	jasper-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel >= 1.0
 BuildRequires:	libtiff-devel >= 4
-BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxslt-progs
-BuildRequires:	meson >= 0.46.0
-BuildRequires:	ninja
+BuildRequires:	meson >= 0.48.0
+BuildRequires:	ninja >= 1.5
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.727
+BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
-BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
-Requires:	glib2 >= 1:2.48.0
+Requires:	glib2 >= 1:2.56.0
 Requires:	shared-mime-info
 Suggests:	librsvg >= 2.31
 Conflicts:	gtk+2 < 2:2.21.3-1
@@ -64,12 +60,10 @@ Używana jest przez biblioteki takie jak GTK+ czy Clutter.
 %package devel
 Summary:	Header files for gdk-pixbuf library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gdk-pixbuf
-Group:		X11/Development/Libraries
+Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.48.0
+Requires:	glib2-devel >= 1:2.56.0
 Conflicts:	gtk+2-devel < 2:2.21.3-1
-# for gdk-pixbuf-xlib-2.0:
-Requires:	xorg-lib-libX11-devel
 
 %description devel
 Header files for gdk-pixbuf library.
@@ -78,25 +72,23 @@ Header files for gdk-pixbuf library.
 Pliki nagłówkowe biblioteki gdk-pixbuf.
 
 %package static
-Summary:	Static gdk-pixbuf libraries
-Summary(pl.UTF-8):	Biblioteki statyczne gdk-pixbuf
+Summary:	Static gdk-pixbuf library
+Summary(pl.UTF-8):	Biblioteka statyczna gdk-pixbuf
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
-Static gdk-pixbuf libraries.
+Static gdk-pixbuf library.
 
 %description static -l pl.UTF-8
-Biblioteki statyczne gdk-pixbuf.
+Biblioteka statyczna gdk-pixbuf.
 
 %package apidocs
 Summary:	gdk-pixbuf API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki gdk-pixbuf
 Group:		Documentation
 Conflicts:	gtk+2-apidocs < 2:2.21.3-1
-%if "%{_rpmversion}" >= "5"
-BuildArch:	noarch
-%endif
+%{?noarchpackage}
 
 %description apidocs
 API documentation for gdk-pixbuf library.
@@ -109,18 +101,15 @@ Dokumentacja API biblioteki gdk-pixbuf.
 
 %build
 %meson build \
-	-Ddocs=%{?with_apidocs:true}%{!?with_apidocs:false} \
-	-Dinstalled_tests=false \
-	-Djasper=true \
-	-Dman=true \
-	-Dx11=true
+	%{?with_apidocs:-Dgtk_doc=true} \
+	-Dinstalled_tests=false
 
-%meson_build -C build
+%ninja_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%meson_install -j1 -C build
+%ninja_install -j1 -C build
 
 %if "%{_lib}" != "lib"
 # We need to have 32-bit and 64-bit binaries as they have hardcoded LIBDIR.
@@ -162,8 +151,6 @@ fi
 %attr(755,root,root) %{_bindir}/gdk-pixbuf-thumbnailer
 %attr(755,root,root) %{_libdir}/libgdk_pixbuf-2.0.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgdk_pixbuf-2.0.so.0
-%attr(755,root,root) %{_libdir}/libgdk_pixbuf_xlib-2.0.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgdk_pixbuf_xlib-2.0.so.0
 %dir %{_libdir}/gdk-pixbuf-2.0
 %dir %{_libdir}/gdk-pixbuf-2.0/%{abiver}
 %ghost %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders.cache
@@ -179,18 +166,15 @@ fi
 %attr(755,root,root) %{_bindir}/gdk-pixbuf-csource
 %attr(755,root,root) %{_bindir}/gdk-pixbuf-pixdata
 %attr(755,root,root) %{_libdir}/libgdk_pixbuf-2.0.so
-%attr(755,root,root) %{_libdir}/libgdk_pixbuf_xlib-2.0.so
 %{_datadir}/gir-1.0/GdkPixbuf-2.0.gir
 %{_datadir}/gir-1.0/GdkPixdata-2.0.gir
 %{_mandir}/man1/gdk-pixbuf-csource.1*
 %{_includedir}/gdk-pixbuf-2.0
 %{_pkgconfigdir}/gdk-pixbuf-2.0.pc
-%{_pkgconfigdir}/gdk-pixbuf-xlib-2.0.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libgdk_pixbuf-2.0.a
-%{_libdir}/libgdk_pixbuf_xlib-2.0.a
 
 %if %{with apidocs}
 %files apidocs

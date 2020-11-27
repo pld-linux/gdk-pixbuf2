@@ -119,8 +119,6 @@ rm -rf $RPM_BUILD_ROOT
 
 touch $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders.cache
 
-%{?with_apidocs:%{__rm} -r $RPM_BUILD_ROOT%{_gtkdocdir}}
-
 %{__mv} $RPM_BUILD_ROOT%{_localedir}/{sr@ije,sr@ijekavian}
 # not supported by glibc
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/io

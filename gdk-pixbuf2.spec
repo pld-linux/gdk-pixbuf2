@@ -6,12 +6,12 @@
 Summary:	GdkPixbuf - an image loading and scaling library
 Summary(pl.UTF-8):	GdkPixbuf - biblioteka ładująca i skalująca obrazki
 Name:		gdk-pixbuf2
-Version:	2.42.0
+Version:	2.42.2
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-%{version}.tar.xz
-# Source0-md5:	319ebe4d10db655308fd0ad268101542
+# Source0-md5:	7d7617db8dae8ce313160384ab0a71db
 URL:		https://developer.gnome.org/gdk-pixbuf/
 BuildRequires:	docbook-dtd43-xml
 BuildRequires:	docbook-style-xsl
@@ -23,7 +23,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel >= 1.0
 BuildRequires:	libtiff-devel >= 4
 BuildRequires:	libxslt-progs
-BuildRequires:	meson >= 0.48.0
+BuildRequires:	meson >= 0.55.3
 BuildRequires:	ninja >= 1.5
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig

@@ -88,7 +88,7 @@ Summary:	gdk-pixbuf API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki gdk-pixbuf
 Group:		Documentation
 Conflicts:	gtk+2-apidocs < 2:2.21.3-1
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description apidocs
 API documentation for gdk-pixbuf library.

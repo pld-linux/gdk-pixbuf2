@@ -6,19 +6,19 @@
 Summary:	GdkPixbuf - an image loading and scaling library
 Summary(pl.UTF-8):	GdkPixbuf - biblioteka ładująca i skalująca obrazki
 Name:		gdk-pixbuf2
-Version:	2.42.2
+Version:	2.42.4
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-%{version}.tar.xz
-# Source0-md5:	7d7617db8dae8ce313160384ab0a71db
+# Source0-md5:	628e4767d1636a06dea5b0fa4838f723
 URL:		https://developer.gnome.org/gdk-pixbuf/
 BuildRequires:	docbook-dtd43-xml
 BuildRequires:	docbook-style-xsl
 BuildRequires:	gettext-tools >= 0.19
 BuildRequires:	glib2-devel >= 1:2.56.0
 BuildRequires:	gobject-introspection-devel >= 0.10.0
-BuildRequires:	gtk-doc >= 1.20
+%{?with_apidocs:BuildRequires:	gi-docgen >= 2021.1}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel >= 1.0
 BuildRequires:	libtiff-devel >= 4
@@ -111,10 +111,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %ninja_install -j1 -C build
 
+install -d $RPM_BUILD_ROOT%{_gtkdocdir}
+
 %if "%{_lib}" != "lib"
 # We need to have 32-bit and 64-bit binaries as they have hardcoded LIBDIR.
 # (needed when multilib is used)
 %{__mv} $RPM_BUILD_ROOT%{_bindir}/gdk-pixbuf-query-loaders{,%{pqext}}
+%endif
+
+%if %{with apidocs}
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/doc/gdk-pixbuf $RPM_BUILD_ROOT%{_gtkdocdir}
 %endif
 
 touch $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders.cache

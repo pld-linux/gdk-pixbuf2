@@ -27,6 +27,7 @@ BuildRequires:	meson >= 0.55.3
 BuildRequires:	ninja >= 1.5
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
@@ -120,7 +121,8 @@ install -d $RPM_BUILD_ROOT%{_gtkdocdir}
 %endif
 
 %if %{with apidocs}
-%{__mv} $RPM_BUILD_ROOT%{_datadir}/doc/gdk-pixbuf $RPM_BUILD_ROOT%{_gtkdocdir}
+# FIXME: better common place to package gi-docgen genrated docs?
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/doc/gdk-pixbuf/reference/* $RPM_BUILD_ROOT%{_gtkdocdir}
 %endif
 
 touch $RPM_BUILD_ROOT%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders.cache
@@ -184,4 +186,5 @@ fi
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/gdk-pixbuf
+%{_gtkdocdir}/gdk-pixdata
 %endif

@@ -26,7 +26,7 @@ BuildRequires:	ninja >= 1.5
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 2.029
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -99,17 +99,17 @@ Dokumentacja API biblioteki gdk-pixbuf.
 %setup -q -n gdk-pixbuf-%{version}
 
 %build
-%meson build \
+%meson \
 	%{?with_apidocs:-Dgtk_doc=true} \
 	-Dinstalled_tests=false \
 	-Dothers=enabled
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -j1 -C build
+%meson_install
 
 %if "%{_lib}" != "lib"
 # We need to have 32-bit and 64-bit binaries as they have hardcoded LIBDIR.

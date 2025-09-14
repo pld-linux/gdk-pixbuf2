@@ -1,27 +1,32 @@
+# NOTE: as of 2.44.1, glycin works only as builtin
 #
 # Conditional build:
 %bcond_without	apidocs		# API documentation
+%bcond_without	glycin		# Glycin loaders support
+%bcond_without	tests		# test suite
 
 %define		abiver		2.10.0
 Summary:	GdkPixbuf - an image loading and scaling library
 Summary(pl.UTF-8):	GdkPixbuf - biblioteka ładująca i skalująca obrazki
 Name:		gdk-pixbuf2
-Version:	2.42.12
-Release:	2
+Version:	2.44.1
+Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-%{version}.tar.xz
-# Source0-md5:	f986fdbba5ec6233c96f8b6535811780
+Source0:	https://download.gnome.org/sources/gdk-pixbuf/2.44/gdk-pixbuf-%{version}.tar.xz
+# Source0-md5:	27c04b847fcf9e5bfb7ac5ce2a08ecd0
 URL:		https://developer.gnome.org/gdk-pixbuf/
 BuildRequires:	docutils
 BuildRequires:	gettext-tools >= 0.19
 BuildRequires:	glib2-devel >= 1:2.56.0
+%{?with_glycin:BuildRequires:	glycin-devel >= 2.0}
+%{?with_tests:BuildRequires:	glycin-loaders >= 2.0}
 BuildRequires:	gobject-introspection-devel >= 0.10.0
 %{?with_apidocs:BuildRequires:	gi-docgen >= 2021.1}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel >= 1.0
 BuildRequires:	libtiff-devel >= 4
-BuildRequires:	meson >= 0.55.3
+BuildRequires:	meson >= 1.5
 BuildRequires:	ninja >= 1.5
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
@@ -31,6 +36,10 @@ BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.56.0
+%if %{with glycin}
+Requires:	glycin-loaders >= 2.0
+Requires:	glycin-thumbnailer >= 2.0
+%endif
 Requires:	shared-mime-info
 Suggests:	librsvg >= 2.31
 Conflicts:	gtk+2 < 2:2.21.3-1
@@ -100,9 +109,20 @@ Dokumentacja API biblioteki gdk-pixbuf.
 
 %build
 %meson \
+	-Dandroid=disabled \
+	-Dbuiltin_loaders=%{?with_glycin:glycin} \
+	-Ddocumentation=true \
+	-Dgif=enabled \
 	%{?with_apidocs:-Dgtk_doc=true} \
+	-Dglycin=%{__enabled_disabled glycin} \
 	-Dinstalled_tests=false \
-	-Dothers=enabled
+	-Dintrospection=enabled \
+	-Djpeg=enabled \
+	-Dothers=enabled \
+	-Dpng=enabled \
+	-Dthumbnailer=enabled \
+	%{!?with_tests:-Dtests=false} \
+	-Dtiff=enabled
 
 %meson_build
 
@@ -159,7 +179,19 @@ fi
 %dir %{_libdir}/gdk-pixbuf-2.0/%{abiver}
 %ghost %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders.cache
 %dir %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders
-%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-*.so
+%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-ani.so
+%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-bmp.so
+%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-gif.so
+%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-icns.so
+%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-ico.so
+%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-jpeg.so
+%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-png.so
+%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-pnm.so
+%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-qtif.so
+%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-tga.so
+%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-tiff.so
+%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-xbm.so
+%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-xpm.so
 %{_datadir}/thumbnailers/gdk-pixbuf-thumbnailer.thumbnailer
 %{_libdir}/girepository-1.0/GdkPixbuf-2.0.typelib
 %{_libdir}/girepository-1.0/GdkPixdata-2.0.typelib

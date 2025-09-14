@@ -71,6 +71,10 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gdk-pixbuf
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.56.0
+%{?with_glycin:Requires:	glycin-devel >= 2.0}
+Requires:	libjpeg-devel
+Requires:	libpng-devel >= 1.0
+Requires:	libtiff-devel >= 4
 Conflicts:	gtk+2-devel < 2:2.21.3-1
 
 %description devel

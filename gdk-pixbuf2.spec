@@ -3,6 +3,7 @@
 # Conditional build:
 %bcond_without	apidocs		# API documentation
 %bcond_without	glycin		# Glycin loaders support
+%bcond_without	static_libs	# static libraries
 %bcond_without	tests		# test suite
 
 %define		abiver		2.10.0
@@ -113,6 +114,7 @@ Dokumentacja API biblioteki gdk-pixbuf.
 
 %build
 %meson \
+	%{!?with_static_libs:--default-library=shared} \
 	-Dandroid=disabled \
 	-Dbuiltin_loaders=%{?with_glycin:glycin} \
 	-Ddocumentation=%{__true_false apidocs} \
@@ -211,9 +213,11 @@ fi
 %{_includedir}/gdk-pixbuf-2.0
 %{_pkgconfigdir}/gdk-pixbuf-2.0.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libgdk_pixbuf-2.0.a
+%endif
 
 %if %{with apidocs}
 %files apidocs

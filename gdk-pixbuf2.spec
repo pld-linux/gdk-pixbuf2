@@ -16,7 +16,7 @@ License:	LGPL v2+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/gdk-pixbuf/2.44/gdk-pixbuf-%{version}.tar.xz
 # Source0-md5:	27c04b847fcf9e5bfb7ac5ce2a08ecd0
-URL:		https://developer.gnome.org/gdk-pixbuf/
+URL:		https://gnome.pages.gitlab.gnome.org/gtk/gdk-pixbuf/
 BuildRequires:	docutils
 BuildRequires:	gettext-tools >= 0.19
 BuildRequires:	glib2-devel >= 1:2.56.0

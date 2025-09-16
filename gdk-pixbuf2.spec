@@ -115,9 +115,8 @@ Dokumentacja API biblioteki gdk-pixbuf.
 %meson \
 	-Dandroid=disabled \
 	-Dbuiltin_loaders=%{?with_glycin:glycin} \
-	-Ddocumentation=true \
+	-Ddocumentation=%{__true_false apidocs} \
 	-Dgif=enabled \
-	%{?with_apidocs:-Dgtk_doc=true} \
 	-Dglycin=%{__enabled_disabled glycin} \
 	-Dinstalled_tests=false \
 	-Dintrospection=enabled \

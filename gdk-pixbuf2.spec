@@ -15,7 +15,7 @@ Summary:	GdkPixbuf - an image loading and scaling library
 Summary(pl.UTF-8):	GdkPixbuf - biblioteka ładująca i skalująca obrazki
 Name:		gdk-pixbuf2
 Version:	2.44.1
-Release:	2
+Release:	2.1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/gdk-pixbuf/2.44/gdk-pixbuf-%{version}.tar.xz

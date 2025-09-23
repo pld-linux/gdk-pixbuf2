@@ -6,6 +6,10 @@
 %bcond_without	static_libs	# static libraries
 %bcond_without	tests		# test suite
 
+%if %{without glycin}
+%undefine	with_tests
+%endif
+
 %define		abiver		2.10.0
 Summary:	GdkPixbuf - an image loading and scaling library
 Summary(pl.UTF-8):	GdkPixbuf - biblioteka ładująca i skalująca obrazki

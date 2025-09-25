@@ -14,12 +14,12 @@
 Summary:	GdkPixbuf - an image loading and scaling library
 Summary(pl.UTF-8):	GdkPixbuf - biblioteka ładująca i skalująca obrazki
 Name:		gdk-pixbuf2
-Version:	2.44.1
-Release:	3
+Version:	2.44.2
+Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/gdk-pixbuf/2.44/gdk-pixbuf-%{version}.tar.xz
-# Source0-md5:	27c04b847fcf9e5bfb7ac5ce2a08ecd0
+# Source0-md5:	75f9cae9bd3c82d4648673e86a77c7bb
 URL:		https://gnome.pages.gitlab.gnome.org/gtk/gdk-pixbuf/
 BuildRequires:	docutils
 BuildRequires:	gettext-tools >= 0.19
@@ -183,7 +183,7 @@ fi
 %attr(755,root,root) %{_bindir}/gdk-pixbuf-query-loaders%{pqext}
 %attr(755,root,root) %{_bindir}/gdk-pixbuf-thumbnailer
 %attr(755,root,root) %{_libdir}/libgdk_pixbuf-2.0.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgdk_pixbuf-2.0.so.0
+%ghost %{_libdir}/libgdk_pixbuf-2.0.so.0
 %dir %{_libdir}/gdk-pixbuf-2.0
 %dir %{_libdir}/gdk-pixbuf-2.0/%{abiver}
 %ghost %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders.cache
@@ -210,7 +210,7 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gdk-pixbuf-csource
 %attr(755,root,root) %{_bindir}/gdk-pixbuf-pixdata
-%attr(755,root,root) %{_libdir}/libgdk_pixbuf-2.0.so
+%{_libdir}/libgdk_pixbuf-2.0.so
 %{_datadir}/gir-1.0/GdkPixbuf-2.0.gir
 %{_datadir}/gir-1.0/GdkPixdata-2.0.gir
 %{_mandir}/man1/gdk-pixbuf-csource.1*

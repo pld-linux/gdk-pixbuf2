@@ -14,18 +14,18 @@
 Summary:	GdkPixbuf - an image loading and scaling library
 Summary(pl.UTF-8):	GdkPixbuf - biblioteka ładująca i skalująca obrazki
 Name:		gdk-pixbuf2
-Version:	2.44.2
+Version:	2.44.3
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/gdk-pixbuf/2.44/gdk-pixbuf-%{version}.tar.xz
-# Source0-md5:	75f9cae9bd3c82d4648673e86a77c7bb
+# Source0-md5:	7729e41bed4ead4c094a63d136e2d2e8
 URL:		https://gnome.pages.gitlab.gnome.org/gtk/gdk-pixbuf/
 BuildRequires:	docutils
 BuildRequires:	gettext-tools >= 0.19
 BuildRequires:	glib2-devel >= 1:2.56.0
-%{?with_glycin:BuildRequires:	glycin-devel >= 2.0}
-%{?with_tests:BuildRequires:	glycin-loaders >= 2.0}
+%{?with_glycin:BuildRequires:	glycin-devel >= 2.0.1}
+%{?with_tests:BuildRequires:	glycin-loaders >= 2.0.1}
 BuildRequires:	gobject-introspection-devel >= 0.10.0
 %{?with_apidocs:BuildRequires:	gi-docgen >= 2021.1}
 BuildRequires:	libjpeg-devel
@@ -42,9 +42,9 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.56.0
 %if %{with glycin}
-Requires:	glycin >= 2.0
-Requires:	glycin-loaders >= 2.0
-Requires:	glycin-thumbnailer >= 2.0
+Requires:	glycin >= 2.0.1
+Requires:	glycin-loaders >= 2.0.1
+Requires:	glycin-thumbnailer >= 2.0.1
 %endif
 Requires:	shared-mime-info
 Suggests:	librsvg >= 2.31
@@ -77,7 +77,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gdk-pixbuf
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.56.0
-%{?with_glycin:Requires:	glycin-devel >= 2.0}
+%{?with_glycin:Requires:	glycin-devel >= 2.0.1}
 Requires:	libjpeg-devel
 Requires:	libpng-devel >= 1.0
 Requires:	libtiff-devel >= 4

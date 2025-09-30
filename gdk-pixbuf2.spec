@@ -42,6 +42,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.56.0
 %if %{with glycin}
+Requires:	glycin >= 2.0
 Requires:	glycin-loaders >= 2.0
 Requires:	glycin-thumbnailer >= 2.0
 %endif

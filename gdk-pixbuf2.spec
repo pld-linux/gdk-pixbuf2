@@ -40,9 +40,9 @@ BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires:	glib2 >= 1:2.56.0
+Requires:	glib2%{?_isa} >= 1:2.56.0
 %if %{with glycin}
-Requires:	glycin >= 2.0.1
+Requires:	glycin%{?_isa} >= 2.0.1
 Requires:	glycin-loaders >= 2.0.1
 Requires:	glycin-thumbnailer >= 2.0.1
 %endif
@@ -75,12 +75,12 @@ Używana jest przez biblioteki takie jak GTK+ czy Clutter.
 Summary:	Header files for gdk-pixbuf library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gdk-pixbuf
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.56.0
-%{?with_glycin:Requires:	glycin-devel >= 2.0.1}
-Requires:	libjpeg-devel
-Requires:	libpng-devel >= 1.0
-Requires:	libtiff-devel >= 4
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+Requires:	glib2-devel%{?_isa} >= 1:2.56.0
+%{?with_glycin:Requires:	glycin-devel%{?_isa} >= 2.0.1}
+Requires:	libjpeg-devel%{?_isa}
+Requires:	libpng-devel%{?_isa} >= 1.0
+Requires:	libtiff-devel%{?_isa} >= 4
 Conflicts:	gtk+2-devel < 2:2.21.3-1
 
 %description devel
@@ -93,7 +93,7 @@ Pliki nagłówkowe biblioteki gdk-pixbuf.
 Summary:	Static gdk-pixbuf library
 Summary(pl.UTF-8):	Biblioteka statyczna gdk-pixbuf
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
+Requires:	%{name}-devel%{?_isa} = %{epoch}:%{version}-%{release}
 
 %description static
 Static gdk-pixbuf library.

@@ -14,12 +14,12 @@
 Summary:	GdkPixbuf - an image loading and scaling library
 Summary(pl.UTF-8):	GdkPixbuf - biblioteka ładująca i skalująca obrazki
 Name:		gdk-pixbuf2
-Version:	2.44.5
+Version:	2.44.6
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/gdk-pixbuf/2.44/gdk-pixbuf-%{version}.tar.xz
-# Source0-md5:	1cde6bd5665107fa10d1deef32ec8c4c
+# Source0-md5:	ad6ce42706cd6947971c7d046c804222
 URL:		https://gnome.pages.gitlab.gnome.org/gtk/gdk-pixbuf/
 BuildRequires:	docutils
 BuildRequires:	gettext-tools >= 0.19
@@ -183,25 +183,25 @@ fi
 %doc NEWS README.md
 %attr(755,root,root) %{_bindir}/gdk-pixbuf-query-loaders%{pqext}
 %attr(755,root,root) %{_bindir}/gdk-pixbuf-thumbnailer
-%attr(755,root,root) %{_libdir}/libgdk_pixbuf-2.0.so.*.*.*
+%{_libdir}/libgdk_pixbuf-2.0.so.*.*.*
 %ghost %{_libdir}/libgdk_pixbuf-2.0.so.0
 %dir %{_libdir}/gdk-pixbuf-2.0
 %dir %{_libdir}/gdk-pixbuf-2.0/%{abiver}
 %ghost %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders.cache
 %dir %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders
-%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-ani.so
-%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-bmp.so
-%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-gif.so
-%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-icns.so
-%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-ico.so
-%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-jpeg.so
-%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-png.so
-%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-pnm.so
-%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-qtif.so
-%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-tga.so
-%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-tiff.so
-%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-xbm.so
-%attr(755,root,root) %{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-xpm.so
+%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-ani.so
+%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-bmp.so
+%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-gif.so
+%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-icns.so
+%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-ico.so
+%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-jpeg.so
+%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-png.so
+%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-pnm.so
+%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-qtif.so
+%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-tga.so
+%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-tiff.so
+%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-xbm.so
+%{_libdir}/gdk-pixbuf-2.0/%{abiver}/loaders/libpixbufloader-xpm.so
 %{_datadir}/thumbnailers/gdk-pixbuf-thumbnailer.thumbnailer
 %{_libdir}/girepository-1.0/GdkPixbuf-2.0.typelib
 %{_libdir}/girepository-1.0/GdkPixdata-2.0.typelib
